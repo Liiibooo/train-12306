@@ -7,10 +7,9 @@ import DepartDate from './DepartDate.jsx'
 import HeightSpeed from './HeightSpeed.jsx'
 import Journey from './Journey.jsx'
 import Submit from './submit.jsx'
-import { render } from 'react-dom';
 
 function App(props) {
-    render(
+    return(
         <div>
             <Header></Header>
             <Journey></Journey>
@@ -23,6 +22,10 @@ function App(props) {
 }
 
 export default connect(
-    function mapStateToProps(state) { },
-    function mapDispatchToProps(dispatch) { }
+    function mapStateToProps(state) {
+        return {};
+     },
+    function mapDispatchToProps(dispatch) {
+        return {};
+     }
 )(App);
