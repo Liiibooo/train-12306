@@ -95,7 +95,7 @@ export function exchangeFromTo() {
     return (dispatch, getState) => {
         const { from, to } = getState()
         dispatch(setFrom(to))
-        dispatch(setFrom(from))
+        dispatch(setTo(from))
     }
 
 }
