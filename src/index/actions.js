@@ -59,7 +59,7 @@ export function showCitySelector(currentSelectingLeftCity) {
     }
 }
 
-export function hideCitySelecor() {
+export function hideCitySelector() {
     return {
         type: ACTION_SET_IS_CITY_SELECTOR_VISIBLE,
         payload: false

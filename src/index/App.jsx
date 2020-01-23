@@ -13,20 +13,29 @@ import CitySelector from '../common/CitySelector'
 
 import {
     exchangeFromTo,
-    showCitySelector
+    showCitySelector,
+    hideCitySelector
 } from './actions'
 
 function App(props) {
     const {
         from,
         to,
-        dispatch
+        isCitySelectorVisible,
+        cityData,
+        isLoadingCityData,
+        dispatch,
     } = props
 
     const onBack = useCallback(() => {
         window.history.back();
     }, [])
 
+    const citySelectorCbs = useMemo(() => {
+        return bindActionCreators({
+            onBack: hideCitySelector
+        }, dispatch)
+    }, [])
     // const doExchangeFromTo = useCallback(() => {
     //     dispatch(exchangeFromTo())
     // }, [])
@@ -56,8 +65,12 @@ function App(props) {
                 <HeightSpeed></HeightSpeed>
                 <Submit></Submit>
             </form>
-            <CitySelector>
-                
+            <CitySelector
+                show={isCitySelectorVisible}
+                cityData={cityData}
+                isLoading={isLoadingCityData}
+                {...citySelectorCbs}
+            >
             </CitySelector>
         </div>
     )
