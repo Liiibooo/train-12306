@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import './CitySelector.css'
@@ -7,10 +7,17 @@ export default function CitySelector(props) {
         show,
         cityData,
         isLoading,
-        onBack
+        onBack,
+        fetchCityData,
     } = props
     const [searchKey, setSearchKey] = useState('')
-    const key = searchKey.trim()
+    const key = useMemo(() => searchKey.trim(), [searchKey])
+
+    useEffect(() => {
+        if (!show || cityData || isLoading) return;
+        fetchCityData()
+    }, [show,cityData,isLoading])
+
     return (
         <div className={classnames('city-selector', { hidden: !show })} >
             <div className="city-search">
