@@ -30,7 +30,7 @@ export function setIsLoadingCityData(isLoadingCityData) {
         payload: isLoadingCityData,
     }
 }
-
+//设置城市数据
 export function setCityData(cityDate) {
     return {
         type: ACTION_SET_CITY_DATA,
@@ -68,6 +68,7 @@ export function hideCitySelector() {
     }
 }
 
+//选择始发站/终点站
 export function setSelectedCity(city) {
     return (dispatch, getState) => {
         const { currentSelectingLeftCity } = getState()
@@ -76,6 +77,7 @@ export function setSelectedCity(city) {
         } else {
             dispatch(setTo(city))
         }
+        dispatch(hideCitySelector())
     }
 }
 
@@ -106,8 +108,8 @@ export function fetchCityData() {
         const { isLoadingCityData } = getState()
 
         if (isLoadingCityData) return;
-
-        const cache = JSON.parse(localStorage.getItem('city_data_cache') || {})
+        //缓存城市数据
+        const cache = JSON.parse(localStorage.getItem('city_data_cache') || '{}')
         if (Date.now() < cache.expires) {
             dispatch(setCityData(cache.data))
             return
