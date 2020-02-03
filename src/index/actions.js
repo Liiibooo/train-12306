@@ -103,6 +103,8 @@ export function exchangeFromTo() {
     }
 }
 
+
+//异步获取城市列表
 export function fetchCityData() {
     return (dispatch, getState) => {
         const { isLoadingCityData } = getState()
