@@ -9,14 +9,17 @@ import HeightSpeed from './HeightSpeed.jsx'
 import Journey from './Journey.jsx'
 import Submit from './submit.jsx'
 
-import CitySelector from '../common/CitySelector'
+import CitySelector from '../common/CitySelector.jsx'
+import DateSelector from '../common/DateSelector.jsx'
 
 import {
     exchangeFromTo,
     showCitySelector,
     hideCitySelector,
     fetchCityData,
-    setSelectedCity
+    setSelectedCity,
+    showDateSelector,
+    hideDateSelector
 } from './actions'
 
 function App(props) {
@@ -27,6 +30,8 @@ function App(props) {
         cityData,
         isLoadingCityData,
         dispatch,
+        departDate,
+        isDateSelectorVisible
     } = props
 
     const onBack = useCallback(() => {
@@ -40,13 +45,6 @@ function App(props) {
             onSelect: setSelectedCity
         }, dispatch)
     }, [])
-    // const doExchangeFromTo = useCallback(() => {
-    //     dispatch(exchangeFromTo())
-    // }, [])
-
-    // const doShowCitySelector = useCallback((m) => {
-    //     dispatch(showCitySelector(m))
-    // }, [])
 
     const cbs = useMemo(() => {
         return bindActionCreators({
@@ -54,6 +52,19 @@ function App(props) {
             showCitySelector
         }, dispatch)
     }, [])
+
+    const departDateCbs = useMemo(() => {
+        return bindActionCreators({
+            onClick: showDateSelector
+        }, dispatch)
+    },[])
+
+    const dateSelectorCbs = useMemo(() => {
+        return bindActionCreators({
+            onBack:hideDateSelector
+        },dispatch)
+    },[])
+
     return (
         <div>
             <div className="header-wrapper">
@@ -65,7 +76,10 @@ function App(props) {
                     to={to}
                     {...cbs}
                 ></Journey>
-                <DepartDate></DepartDate>
+                <DepartDate
+                    time={departDate}
+                    {...departDateCbs}
+                ></DepartDate>
                 <HeightSpeed></HeightSpeed>
                 <Submit></Submit>
             </form>
@@ -76,6 +90,11 @@ function App(props) {
                 {...citySelectorCbs}
             >
             </CitySelector>
+            <DateSelector
+                {...dateSelectorCbs}
+                show={isDateSelectorVisible}
+            />
+           
         </div>
     )
 

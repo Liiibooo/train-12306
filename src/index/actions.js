@@ -6,6 +6,7 @@ export const ACTION_SET_CITY_DATA = 'SET_CITY_DATA';
 export const ACTION_SET_IS_LOADING_CITY_DATA = 'SET_IS_LOADING_CITY_DATA';
 export const ACTION_SET_IS_DATE_SELECTOR_VISIBLE = 'SET_IS_DATE_SELECTOR_VISIBLE';
 export const ACTION_SET_HIGH_SPEED = 'SET_HIGH_SPEED';
+export const ACTION_SET_DEPART_DATE = 'SET_DEPART_DATE';
 
 //设置始发地
 export function setFrom(from) {
@@ -83,14 +84,14 @@ export function setSelectedCity(city) {
 
 export function showDateSelector() {
     return {
-        type: ACTION_SET_IS_CITY_SELECTOR_VISIBLE,
+        type: ACTION_SET_IS_DATE_SELECTOR_VISIBLE,
         payload: true
     }
 }
 
 export function hideDateSelector() {
     return {
-        type: ACTION_SET_IS_CITY_SELECTOR_VISIBLE,
+        type: ACTION_SET_IS_DATE_SELECTOR_VISIBLE,
         payload: false
     }
 }
@@ -103,6 +104,12 @@ export function exchangeFromTo() {
     }
 }
 
+export function setDepartDate(departDate) {
+    return {
+        type: ACTION_SET_DEPART_DATE,
+        payload: departDate,
+    };
+}
 
 //异步获取城市列表
 export function fetchCityData() {

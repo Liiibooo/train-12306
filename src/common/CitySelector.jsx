@@ -245,8 +245,8 @@ export default function CitySelector(props) {
     )
 }
 
-CitySelector.propTypes = {
-    show: PropTypes.bool.isRequired,
-    onBack: PropTypes.func.isRequired,
-    onSelect: PropTypes.func.isRequired
-}
+// CitySelector.propTypes = {
+//     show: PropTypes.bool.isRequired,
+//     onBack: PropTypes.func.isRequired,
+//     onSelect: PropTypes.func.isRequired
+// }
