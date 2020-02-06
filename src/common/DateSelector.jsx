@@ -10,7 +10,7 @@ function Day(props) {
         day,
         onSelect
     } = props
-    
+
     if (!day) {
         return <td className="null"></td>
     }
@@ -27,7 +27,7 @@ function Day(props) {
     const dateString = now === day ? '今天' : new Date(day).getDate()
 
     return (
-        <td className={classnames(classes)}>
+        <td className={classnames(classes)} onClick={() => { onSelect (day)}}>
             {
                 dateString
             }
@@ -43,7 +43,7 @@ function Week(props) {
     return (
         <tr className="date-table-days">
             {
-                days.map((day,idx) => {
+                days.map((day, idx) => {
                     return <Day key={idx} day={day} onSelect={onSelect}></Day>
                 })
             }
@@ -76,8 +76,8 @@ function Month(props) {
         const week = days.slice(row * 7, (row + 1) * 7);
         weeks.push(week)
     }
-    console.log(weeks,'weeks');
-    
+    console.log(weeks, 'weeks');
+
 
     return (
         <table className="date-table">
@@ -138,7 +138,7 @@ export default function DateSelector(props) {
 
     now.setMonth(now.getMonth() + 1)
     monthSequence.push(now.getTime())
-    
+
 
     return (
         <div className={classnames('date-selector', { hidden: !show })}>

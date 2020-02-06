@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from 'react'
 import { connect } from 'react-redux';
 import './App.css'
 import { bindActionCreators } from 'redux'
-
+import fp from '../common/fp'
 import Header from "../common/Header.jsx";
 import DepartDate from './DepartDate.jsx'
 import HeightSpeed from './HeightSpeed.jsx'
@@ -19,7 +19,8 @@ import {
     fetchCityData,
     setSelectedCity,
     showDateSelector,
-    hideDateSelector
+    hideDateSelector,
+    setDepartDate
 } from './actions'
 
 function App(props) {
@@ -57,13 +58,23 @@ function App(props) {
         return bindActionCreators({
             onClick: showDateSelector
         }, dispatch)
-    },[])
+    }, [])
 
     const dateSelectorCbs = useMemo(() => {
         return bindActionCreators({
-            onBack:hideDateSelector
-        },dispatch)
-    },[])
+            onBack: hideDateSelector
+        }, dispatch)
+    }, [])
+
+    const onSelectDate = useCallback((day) => {
+        if (!day) {
+            return
+        }
+        if (day < fp()) return;
+
+        dispatch(setDepartDate(day));
+        dispatch(hideDateSelector())
+    }, [])
 
     return (
         <div>
@@ -91,10 +102,11 @@ function App(props) {
             >
             </CitySelector>
             <DateSelector
-                {...dateSelectorCbs}
                 show={isDateSelectorVisible}
+                onSelect={onSelectDate}
+                {...dateSelectorCbs}
             />
-           
+
         </div>
     )
 
