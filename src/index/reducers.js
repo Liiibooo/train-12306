@@ -74,7 +74,7 @@ export default {
         }
         return state;
     },
-    hightSpeed(state = false, action) {
+    highSpeed(state = false, action) {
         const { type, payload } = action;
         switch (type) {
             case ACTION_SET_HIGH_SPEED:

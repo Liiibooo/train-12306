@@ -1,7 +1,9 @@
-import React from 'react'
-export default function (props) {
+import React, { memo } from 'react'
+import './submit.css'
+export default memo(function (props) {
     return (
-        <div>
+        <div className="submit">
+            <button className="submit-button">搜索</button>
         </div>
     )
-}
+})

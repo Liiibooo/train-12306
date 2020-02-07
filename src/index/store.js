@@ -14,7 +14,7 @@ export default createStore(
         cityData: null,
         isLoadingCityData: false,
         isDateSelectorVisible: false,
-        hightSpeed: false,
+        highSpeed: false,
         departDate:Date.now()
         
     },

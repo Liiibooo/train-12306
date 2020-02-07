@@ -76,7 +76,6 @@ function Month(props) {
         const week = days.slice(row * 7, (row + 1) * 7);
         weeks.push(week)
     }
-    console.log(weeks, 'weeks');
 
 
     return (
