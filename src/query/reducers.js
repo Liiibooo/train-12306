@@ -20,7 +20,7 @@ import {
     ACTION_SET_ARRIVE_TIME_END,
     ACTION_SET_IS_FILTERS_VISIBLE,
     ACTION_SET_SEARCH_PARSED,
-} from './actions';
+} from './action';
 import { ORDER_DEPART } from './constant';
 
 export default {
