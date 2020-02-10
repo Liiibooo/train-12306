@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { connect } from 'react-redux';
 import './App.css'
 import URI from 'urijs'
@@ -8,6 +8,8 @@ import Header from '../common/Header'
 import Nav from '../common/Nav'
 import List from './List'
 import Bottom from './Bottom'
+
+import useNav from '../common/useNav'
 
 import {
     setFrom,
@@ -19,8 +21,16 @@ import {
     setTicketTypes,
     setTrainTypes,
     setDepartStations,
-    setArriveStations
+    setArriveStations,
+    prevDate,
+    nextDate,
+
+    toggleOrderType,
+    toggleHighSpeed,
+    toggleOnlyTickets,
+    toggleIsFiltersVisible
 } from './action'
+import { bindActionCreators } from 'redux';
 
 function App(props) {
     const {
@@ -39,7 +49,9 @@ function App(props) {
         departTimeEnd,
         arriveTimeStart,
         arriveTimeEnd,
-        searchParsed
+        searchParsed,
+        isFiltersVisible,
+        trainList
     } = props;
 
     useEffect(() => {
@@ -123,14 +135,42 @@ function App(props) {
         window.history.back();
     }, [])
 
+    const { isPrevDisabled,
+        isNextDisabled,
+        prev,
+        next } = useNav(departDate, dispatch, prevDate, nextDate)
+
+    const bottomCbs = useMemo(() => {
+        return bindActionCreators({
+            toggleOrderType,
+            toggleHighSpeed,
+            toggleOnlyTickets,
+            toggleIsFiltersVisible,
+        }, dispatch)
+    }, [])
+
+
     return (
         <div>
             <div className="header-wrapper">
                 <Header title={`${from} → ${to}`} onBack={onBack}></Header>
             </div>
-            <Nav></Nav>
-            <List></List>
-            <Bottom></Bottom>
+            <Nav
+                date={departDate}
+                isPrevDisabled={isPrevDisabled}
+                isNextDisabled={isNextDisabled}
+                prev={prev}
+                next={next}
+            >
+            </Nav>
+            <List list={trainList}></List>
+            <Bottom
+                highSpeed={highSpeed}
+                orderType={orderType}
+                onlyTickets={onlyTickets}
+                isFiltersVisible={isFiltersVisible}
+                {...bottomCbs}
+            ></Bottom>
         </div>
     )
 
