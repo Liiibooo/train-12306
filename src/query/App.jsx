@@ -22,13 +22,24 @@ import {
     setTrainTypes,
     setDepartStations,
     setArriveStations,
+
     prevDate,
     nextDate,
 
     toggleOrderType,
     toggleHighSpeed,
     toggleOnlyTickets,
-    toggleIsFiltersVisible
+    toggleIsFiltersVisible,
+
+
+    setCheckedTicketTypes,
+    setCheckedTrainTypes,
+    setCheckedDepartStations,
+    setCheckedArriveStations,
+    setDepartTimeStart,
+    setDepartTimeEnd,
+    setArriveTimeStart,
+    setArriveTimeEnd
 } from './action'
 import { bindActionCreators } from 'redux';
 
@@ -51,7 +62,11 @@ function App(props) {
         arriveTimeEnd,
         searchParsed,
         isFiltersVisible,
-        trainList
+        trainList,
+        ticketTypes,
+        trainTypes,
+        departStations,
+        arriveStations,
     } = props;
 
     useEffect(() => {
@@ -146,6 +161,14 @@ function App(props) {
             toggleHighSpeed,
             toggleOnlyTickets,
             toggleIsFiltersVisible,
+            setCheckedTicketTypes,
+            setCheckedTrainTypes,
+            setCheckedDepartStations,
+            setCheckedArriveStations,
+            setDepartTimeStart,
+            setDepartTimeEnd,
+            setArriveTimeStart,
+            setArriveTimeEnd,
         }, dispatch)
     }, [])
 
@@ -169,6 +192,18 @@ function App(props) {
                 orderType={orderType}
                 onlyTickets={onlyTickets}
                 isFiltersVisible={isFiltersVisible}
+                checkedTicketTypes={checkedTicketTypes}
+                checkedTrainTypes={checkedTrainTypes}
+                checkedDepartStations={checkedDepartStations}
+                checkedArriveStations={checkedArriveStations}
+                departTimeStart={departTimeStart}
+                departTimeEnd={departTimeEnd}
+                arriveTimeStart={arriveTimeStart}
+                arriveTimeEnd={arriveTimeEnd}
+                ticketTypes={ticketTypes}
+                trainTypes={trainTypes}
+                departStations={departStations}
+                arriveStations={arriveStations}
                 {...bottomCbs}
             ></Bottom>
         </div>
