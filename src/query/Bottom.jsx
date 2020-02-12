@@ -78,21 +78,28 @@ const BottomModal = memo(function BottomModal(props) {
         toggleIsFiltersVisible,
     } = props;
 
+    //坐席类型数据映射
     const [localCheckedTicketTypes, setLocalCheckedTicketTypes] = useState(() => {
         return {
             ...checkedTicketTypes
         }
     });
+
+    //车次类型数据映射
     const [localCheckedTrainTypes, setLocalCheckedTrainTypes] = useState(() => {
         return {
             ...checkedTrainTypes
         }
     });
+
+    //出发车站数据映射
     const [localCheckedDepartStations, setLocalCheckedDepartStations] = useState(() => {
         return {
             ...checkedDepartStations
         }
     });
+
+    //到达车站数据映射
     const [localCheckedArriveStations, setLocalCheckedArriveStations] = useState(() => {
         return {
             ...checkedArriveStations
@@ -130,14 +137,43 @@ const BottomModal = memo(function BottomModal(props) {
         }
     ]
 
+    //提交筛选条件
+    function sure() {
+        setCheckedTicketTypes(localCheckedTicketTypes)
+        setCheckedTrainTypes(localCheckedTrainTypes)
+        setCheckedDepartStations(localCheckedDepartStations)
+        setCheckedArriveStations(localCheckedArriveStations)
+
+        setDepartTimeStart(localDepartTimeStart)
+        setDepartTimeEnd(localDepartTimeEnd)
+
+        setArriveTimeStart(localArriveTimeStart)
+        setArriveTimeEnd(localArriveTimeEnd)
+
+        toggleIsFiltersVisible()
+    }
+
+    //重置筛选条件
+    function reset() {
+        setLocalCheckedTicketTypes({})
+        setLocalCheckedTrainTypes({})
+        setLocalCheckedDepartStations({})
+        setLocalCheckedArriveStations({})
+
+        setLocalDepartTimeStart(0)
+        setLocalDepartTimeEnd(24)
+        setLocalArriveTimeStart(0)
+        setLocalArriveTimeEnd(24)
+
+    }
 
     return (
         <div className="bottom-modal">
             <div className="bottom-dialog">
                 <div className="bottom-dialog-content">
                     <div className="title">
-                        <span className="reset">重置</span>
-                        <span className="ok">确定</span>
+                        <span className="reset" onClick={reset}>重置</span>
+                        <span className="ok" onClick={sure}>确定</span>
                     </div>
                     <div className="options">
                         {
